@@ -34,22 +34,14 @@
             <th>{{headers.description}}</th>
             <th>{{headers.price}}</th>
             <th>{{headers.available}}</th>
+            <th>{{headers.rating}}</th>
           </tr>
         </thead>
         <tbody>
           @for(product of products | productFilter:filterSearch; track product.id) {
-          <tr>
-            @if(showImage) {
-            <td><img [src]="product.imageUrl" alt=""
-                   [title]="product.description | uppercase"></td>
-            }
-            @else {
-            <td></td>
-            }
-            <td>{{product.description}}</td>
-            <td>{{product.price | currency:'EUR':'symbol'}}</td>
-            <td>{{product.available | date:'dd/MM/y'}}</td>
-          </tr>
+          <tr app-product-item
+              [product]="product"
+              [showImage]="showImage"></tr>
           }
         </tbody>
       </table>
