@@ -5,7 +5,10 @@
   "projects": {
     "angular-products": {
       "i18n": {
-        "sourceLocale": "es-ES"
+        "sourceLocale": "es-ES",
+        "locales": {
+          "ca-ES-VALENCIA": "src/locale/messages.ca-ES-valencia.xlf"
+        }
       },
       "projectType": "application",
       "schematics": {},
@@ -16,6 +19,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "localize": ["ca-ES-VALENCIA"],
             "outputPath": "dist/angular-products",
             "index": "src/index.html",
             "browser": "src/main.ts",
