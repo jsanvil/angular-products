@@ -7,6 +7,7 @@ import { ProductItemComponent } from '../product-item/product-item.component';
 import { ProductService } from '../services/product.service';
 import { Observable } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-products-list',
@@ -22,15 +23,20 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './products-list.component.css'
 })
 export class ProductsListComponent implements OnInit {
-  title = 'Mi lista de productos';
-  headers = { description: 'Producto', price: 'Precio', available: 'Disponible', image: 'Imagen', rating: 'Valoración' };
-  showImage = true;
 
-  filterSearch = '';
+  protected headers = {
+    description: 'Producto',
+    price: 'Precio',
+    available: 'Disponible',
+    image: 'Imagen',
+    rating: 'Valoración'
+  };
 
-  products: Product[] = [];
+  protected showImage = true;
+  protected filterSearch = '';
+  protected products: Product[] = [];
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, protected title: Title) { }
 
   ngOnInit() {
     this.productService.getProducts().subscribe({

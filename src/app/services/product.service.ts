@@ -24,7 +24,11 @@ export class ProductService {
   // obtiene un producto
   // GET /products/:id
   getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.productsEndpoint}/${id}`);
+    return this.http.get<Product>(`${this.productsEndpoint}/${id}`).pipe(
+      catchError((resp: HttpErrorResponse) =>
+        throwError(() =>
+          new Error(`Error obteniendo producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`))
+      ));
   }
 
   // agrega un producto
@@ -40,7 +44,11 @@ export class ProductService {
   // actualiza un producto
   // PUT /products/:id
   updateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.productsEndpoint}/${product.id}`, product);
+    return this.http.put<Product>(`${this.productsEndpoint}/${product.id}`, product).pipe(
+      catchError((resp: HttpErrorResponse) =>
+        throwError(() =>
+          new Error(`Error al actualizar producto. Código de servidor: ${resp.status}. Mensaje: ${resp.message}`))
+      ));
   }
 
   // elimina un producto

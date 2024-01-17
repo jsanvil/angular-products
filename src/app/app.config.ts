@@ -1,5 +1,5 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, Injectable } from '@angular/core';
+import { RouterStateSnapshot, TitleStrategy, provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
