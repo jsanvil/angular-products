@@ -5,9 +5,9 @@ import { Product } from '../interfaces/product';
 import { ProductFilterPipe } from '../pipes/product-filter.pipe';
 import { ProductItemComponent } from '../product-item/product-item.component';
 import { ProductService } from '../services/product.service';
-import { Observable } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
+import { HighlightDirective } from '../directives/highlight.directive';
 
 @Component({
   selector: 'app-products-list',
@@ -17,12 +17,14 @@ import { Title } from '@angular/platform-browser';
     HttpClientModule,
     FormsModule,
     ProductFilterPipe,
-    ProductItemComponent
+    ProductItemComponent,
+    HighlightDirective
   ],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.css'
 })
 export class ProductsListComponent implements OnInit {
+  color = '#ffff66';
 
   protected headers = {
     description: 'Producto',

@@ -10,6 +10,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withInterceptors([baseUrlInterceptor])),
     provideRouter(routes),
-    provideAnimations(),
-  ]
+    provideAnimations()
+  ],
 };

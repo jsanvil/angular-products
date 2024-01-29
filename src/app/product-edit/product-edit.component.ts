@@ -1,19 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
-import { ActivatedRoute, Router, UrlTree } from '@angular/router';
+import { FormsModule, NgModel } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../interfaces/product';
 import { ProductService } from '../services/product.service';
 import { ComponentDeactivate } from '../guards/leave-page.guard';
+import { MinDateDirective } from '../validators/min-date.directive';
 
 @Component({
   selector: 'app-product-edit',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, MinDateDirective],
   templateUrl: './product-edit.component.html',
   styleUrl: './product-edit.component.css'
 })
 export class ProductEditComponent implements ComponentDeactivate {
+  @ViewChild('productForm', {static: true}) productForm?: NgModel;
+
   product?: Product;
   productImage: string = '';
 
@@ -24,11 +27,8 @@ export class ProductEditComponent implements ComponentDeactivate {
   ) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.params['id'];
-    this.productService.getProduct(id).subscribe({
-      next: prod => this.product = prod,
-      error: err => console.error(err)
-    });
+    this.product = this.route.snapshot.data['product'];
+    this.product!.available = this.product!.available.replace('.000Z', '');
   }
 
   canDeactivate() {
@@ -36,7 +36,7 @@ export class ProductEditComponent implements ComponentDeactivate {
   }
 
   saveChanges() {
-    if (this.product) {
+    if (this.product && this.productForm!.valid) {
       this.productService.updateProduct(this.product).subscribe({
         next: prod => {
           this.product = prod;
@@ -45,6 +45,13 @@ export class ProductEditComponent implements ComponentDeactivate {
         error: err => console.error(err)
       });
     }
+  }
+
+  validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
+    return {
+      [validClass]: ngModel.touched && ngModel.valid,
+      [errorClass]: ngModel.touched && ngModel.invalid
+    };
   }
 
   changeImage(fileInput: HTMLInputElement) {
