@@ -36,13 +36,6 @@ export class AppComponent {
     this.user = this.loginService.getUserLogged();
   }
 
-  logout(event: Event) {
-    event.preventDefault();
-    this.loginService.logout();
-    this.user = '';
-    this.router.navigate(['/user/login']);
-  }
-
   onUserLogin(user: string) {
     this.user = user;
   }

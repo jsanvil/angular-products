@@ -25,4 +25,11 @@ export class UserProfileComponent {
 
     this.username = this.loginService.getUserLogged();
   }
+
+  logout(event: Event) {
+    event.preventDefault();
+    this.loginService.logout();
+    this.username = '';
+    this.router.navigate(['/user/login']);
+  }
 }

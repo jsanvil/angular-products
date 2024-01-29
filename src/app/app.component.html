@@ -17,7 +17,7 @@
            routerLinkActive="active"
            ariaCurrentWhenActive="page"
            [routerLinkActiveOptions]="{exact: true}">
-          Products
+          Productos
         </a>
       </li>
     </ul>
@@ -29,10 +29,6 @@
          ariaCurrentWhenActive="page">
         <i class="bi bi-person-circle"></i>
         {{user}}
-      </a>
-      <a class="nav-link" href="#" (click)="logout($event)">
-        <i class="bi bi-box-arrow-left"></i>
-        Logout
       </a>
       } @else {
       <a class="nav-link"

@@ -32,7 +32,7 @@ export const routes: Routes = [
   },
   {
     path: 'products/edit/:id',
-    canActivate: [productIdGuard],
+    canActivate: [productIdGuard, loggedUserGuard],
     canDeactivate: [leavePageGuard],
     resolve: {
       product: productResolver

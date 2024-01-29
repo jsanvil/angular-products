@@ -5,9 +5,13 @@
   </div>
   <div class="card-body">
     <h5 class="card-title">👋 Hola {{ username }}</h5>
-    <p class="card-text">Consulta la lista de productos.</p>
-    <a href="#"
-       class="btn btn-primary">Lista de productos</a>
+    <p class="card-text">Welcome back!</p>
+    <div class="text-end">
+    <a class="btn btn-warning" href="#" (click)="logout($event)">
+      <i class="bi bi-box-arrow-left"></i>
+      Cerrar sesión
+    </a>
+  </div>
   </div>
 </div>
 } @else {

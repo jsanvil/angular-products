@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css'
 })

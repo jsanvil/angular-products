@@ -4,7 +4,13 @@ import { LoginService } from '../services/login.service';
 
 // Comprueba si el usuario está logueado
 export const loggedUserGuard: CanActivateFn = (route, state) => {
+  const router = inject(Router);
   const loginService = inject(LoginService);
 
-  return loginService.isLogged();
+  if (!loginService.isLogged()) {
+    router.navigate(['/user/login']);
+    return false;
+  }
+  return true;
 };
+
